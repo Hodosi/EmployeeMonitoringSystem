@@ -6,9 +6,9 @@
 <hibernate-configuration>
     <session-factory>
 
-        <property name="dialect">dialect.SQLiteDialect</property>
+        <property name="dialect">org.hibernate.dialect.SQLiteDialect</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
-        <property name="connection.url">jdbc:sqlite:/C:/MPP/mpp-proiect-repository-Hodosi/Java_ChildrenCompetitionSockets/CompetitionServer/database/competitionORM.db</property>
+        <property name="connection.url">jdbc:sqlite:/C:/MySpace/3.Workspace/Faculty/ISS/MonitorizareAngajati/EmployeeMonitoringSystem/database/system.db</property>
 
         <property name="hibernate.hbm2ddl.auto">update</property>
 
@@ -17,7 +17,10 @@
         <property name="format_sql">true</property>
 
 
-        <mapping resource="competition.model/Participant.hbm.xml"/>
+        <mapping resource="system.model/Boss.hbm.xml"/>
+        <mapping resource="system.model/Company.hbm.xml"/>
+        <mapping resource="system.model/Employee.hbm.xml"/>
+        <mapping resource="system.model/Task.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>
