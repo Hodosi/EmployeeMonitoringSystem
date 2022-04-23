@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+    <class name="Employee" table="employee">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="password" column="password"/>
+        <property name="username" column="username"/>
+        <property name="name" column="name"/>
+        <property name="loginTime" column="loginTime"/>
+
+        <many-to-one name="boss" class="Boss" column="boss_id"/>
+
+        <set name="tasks" inverse="true" cascade="all">
+            <key column="employee_id"/>
+            <one-to-many class="Task"/>
+        </set>
+
+    </class>
+
+</hibernate-mapping>
