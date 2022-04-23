@@ -1,3 +1,4 @@
+import controller.ServerController;
 import controller.SystemController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,16 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import repository.implementations.BossRepository;
+import repository.implementations.CompanyRepository;
+import repository.implementations.EmployeeRepository;
+import repository.implementations.TaskRepository;
+import repository.interfaces.IBossRepository;
+import repository.interfaces.ICompanyRepository;
+import repository.interfaces.IEmployeeRepository;
+import repository.interfaces.ITaskRepository;
+import service.IService;
+import service.Service;
 
 public class Main extends Application {
     private static SessionFactory sessionFactory;
@@ -32,6 +43,15 @@ public class Main extends Application {
         }
     }
 
+    public IService initService(){
+        ICompanyRepository companyRepository = new CompanyRepository(sessionFactory);
+        IBossRepository bossRepository = new BossRepository(sessionFactory);
+        IEmployeeRepository employeeRepository = new EmployeeRepository(sessionFactory);
+        ITaskRepository taskRepository = new TaskRepository(sessionFactory);
+
+        return new Service(companyRepository, bossRepository, employeeRepository, taskRepository);
+    }
+
     public static void main(String[] args) {
         launch(args);
     }
@@ -39,18 +59,21 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         initialize();
+        IService service = initService();
 
-        primaryStage.setTitle("System");
+        primaryStage.setTitle("Server");
         FXMLLoader loader = new FXMLLoader();
         Pane pane = loader.load(
-                getClass().getResourceAsStream("views/systemPage.fxml")
+                getClass().getResourceAsStream("views/serverPage.fxml")
         );
 
-        SystemController systemController = loader.getController();
+        ServerController serverController = loader.getController();
 
-        loader.setController(systemController);
+        serverController.setService(service);
 
-        Scene scene = new Scene(pane, 800, 600);
+        loader.setController(serverController);
+
+        Scene scene = new Scene(pane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
 

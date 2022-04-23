@@ -12,21 +12,21 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SystemController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="575.0" prefWidth="775.0" visible="false">
+      <AnchorPane fx:id="loginAnchorPane" layoutX="14.0" layoutY="14.0" prefHeight="575.0" prefWidth="775.0" visible="false">
          <children>
             <Label alignment="CENTER" layoutX="265.0" layoutY="242.0" prefHeight="26.0" prefWidth="98.0" text="Username:" />
-            <TextField layoutX="371.0" layoutY="243.0" />
+            <TextField fx:id="usernameLoginTextField" layoutX="371.0" layoutY="243.0" />
             <Label alignment="CENTER" layoutX="265.0" layoutY="274.0" prefHeight="26.0" prefWidth="98.0" text="Password:" />
-            <PasswordField layoutX="372.0" layoutY="275.0" />
-            <Button layoutX="365.0" layoutY="311.0" mnemonicParsing="false" text="Login" />
+            <PasswordField fx:id="passwordLoginTextField" layoutX="372.0" layoutY="275.0" />
+            <Button layoutX="365.0" layoutY="311.0" mnemonicParsing="false" onAction="#loginAction" text="Login" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="575.0" prefWidth="775.0" visible="false">
+      <AnchorPane fx:id="bossAnchorPane" layoutX="14.0" layoutY="14.0" prefHeight="575.0" prefWidth="775.0" visible="false">
          <children>
-            <TableView layoutX="14.0" layoutY="14.0" prefHeight="290.0" prefWidth="257.0">
+            <TableView fx:id="employeesTableViewBoss" layoutX="14.0" layoutY="14.0" prefHeight="290.0" prefWidth="257.0">
               <columns>
-                <TableColumn prefWidth="130.4000244140625" text="Employee" />
-                  <TableColumn prefWidth="124.0" text="Login Time" />
+                <TableColumn fx:id="employeeTableColumnBoss" prefWidth="130.4000244140625" text="Employee" />
+                  <TableColumn fx:id="loginTimeTableColumnBoss" prefWidth="124.0" text="Login Time" />
               </columns>
             </TableView>
             <Label alignment="CENTER" layoutX="14.0" layoutY="316.0" prefHeight="34.0" prefWidth="258.0" text="Create new task:">
@@ -35,26 +35,32 @@
                </font>
             </Label>
             <Label layoutX="14.0" layoutY="350.0" prefHeight="26.0" prefWidth="258.0" text=" *Please select an employee first" />
-            <TextField layoutX="14.0" layoutY="419.0" prefHeight="100.0" prefWidth="258.0" />
-            <Label alignment="CENTER" layoutX="13.0" layoutY="385.0" prefHeight="26.0" prefWidth="258.0" text="Description:">
+            <TextField fx:id="taskDescriptionTextFieldBoss" layoutX="14.0" layoutY="456.0" prefHeight="63.0" prefWidth="258.0" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="429.0" prefHeight="26.0" prefWidth="258.0" text="Description:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Button layoutX="108.0" layoutY="535.0" mnemonicParsing="false" text="Send Task" />
-            <TableView layoutX="288.0" layoutY="14.0" prefHeight="504.0" prefWidth="474.0">
+            <Button layoutX="108.0" layoutY="535.0" mnemonicParsing="false" onAction="#sendTaskAction" text="Send Task" />
+            <TableView fx:id="tasksTableViewBoss" layoutX="288.0" layoutY="14.0" prefHeight="504.0" prefWidth="474.0">
               <columns>
-                <TableColumn prefWidth="473.6000122070312" text="Tasks" />
+                <TableColumn fx:id="taskTableColumnBoss" prefWidth="473.6000122070312" text="Tasks" />
               </columns>
             </TableView>
-            <Button layoutX="498.0" layoutY="535.0" mnemonicParsing="false" text="Logout" />
+            <Button layoutX="498.0" layoutY="535.0" mnemonicParsing="false" onAction="#logoutActionBoss" text="Logout" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="376.0" prefHeight="26.0" prefWidth="258.0" text="Name:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="taskNameTextFieldBoss" layoutX="14.0" layoutY="402.0" prefHeight="26.0" prefWidth="258.0" />
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="775.0">
+      <AnchorPane fx:id="employeeAnchorPane" layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="775.0">
          <children>
-            <TableView prefHeight="575.0" prefWidth="474.0">
+            <TableView fx:id="tasksTableViewEmployee" prefHeight="575.0" prefWidth="474.0">
               <columns>
-                <TableColumn prefWidth="473.6000122070312" text="Tasks" />
+                <TableColumn fx:id="taskTableColumnEmployee" prefWidth="473.6000122070312" text="Tasks" />
               </columns>
             </TableView>
             <AnchorPane layoutX="487.0" prefHeight="169.0" prefWidth="287.0">
@@ -64,17 +70,17 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox layoutX="41.0" layoutY="80.0" prefHeight="26.0" prefWidth="78.0" />
-                  <ComboBox layoutX="141.0" layoutY="80.0" prefHeight="26.0" prefWidth="78.0" />
+                  <ComboBox fx:id="hhComboBoxEmployee" layoutX="41.0" layoutY="80.0" prefHeight="26.0" prefWidth="78.0" />
+                  <ComboBox fx:id="mmComboBoxEmployee" layoutX="141.0" layoutY="80.0" prefHeight="26.0" prefWidth="78.0" />
                   <Label alignment="CENTER" layoutX="126.0" layoutY="80.0" prefHeight="26.0" prefWidth="15.0" text=":" />
                   <Label alignment="CENTER" layoutX="7.0" layoutY="46.0" prefHeight="18.0" prefWidth="274.0" text="Please select login time" />
                   <Label layoutX="119.0" layoutY="80.0" prefHeight="26.0" prefWidth="15.0" text="h" />
                   <Label layoutX="219.0" layoutY="80.0" prefHeight="26.0" prefWidth="28.0" text="m" />
-                  <Button layoutX="116.0" layoutY="130.0" mnemonicParsing="false" text="Present" />
+                  <Button layoutX="116.0" layoutY="130.0" mnemonicParsing="false" onAction="#presentAction" text="Present" />
                </children>
             </AnchorPane>
-            <Button layoutX="603.0" layoutY="535.0" mnemonicParsing="false" text="Logout" />
-            <Button layoutX="591.0" layoutY="288.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="78.0" text="Finish Task" />
+            <Button layoutX="603.0" layoutY="535.0" mnemonicParsing="false" onAction="#logoutActionEmployee" text="Logout" />
+            <Button layoutX="591.0" layoutY="288.0" mnemonicParsing="false" onAction="#finishTaskAction" prefHeight="26.0" prefWidth="78.0" text="Finish Task" />
             <Label alignment="CENTER" layoutX="493.0" layoutY="255.0" prefHeight="18.0" prefWidth="274.0" text="*Please select a task before finish it" />
          </children>
       </AnchorPane>
