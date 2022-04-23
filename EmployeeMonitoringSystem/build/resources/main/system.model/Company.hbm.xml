@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="model">
+
+    <class name="Company" table="company">
+        <id name="id" column="id">
+            <generator class="increment"/>
+        </id>
+        <property name="name" column="name"/>
+
+        <set name="bosses" inverse="true" cascade="all">
+            <key column="company_id"/>
+            <one-to-many class="Boss"/>
+        </set>
+
+    </class>
+
+</hibernate-mapping>
