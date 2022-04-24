@@ -49,8 +49,6 @@ public class TaskRepository implements ITaskRepository {
                                         .setMaxResults(1)
                                                 .uniqueResult();
 
-                System.err.println("Stergem taskul" + task.getName());
-
                 session.delete(task);
                 tx.commit();
 

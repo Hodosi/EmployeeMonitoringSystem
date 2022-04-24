@@ -8,7 +8,7 @@ public class Employee {
     private String password;
     private String username;
     private String name;
-    private LocalTime loginTime;
+    private String loginTime;
 
     // relation
     private Boss boss;
@@ -60,7 +60,7 @@ public class Employee {
         return name;
     }
 
-    public LocalTime getLoginTime() {
+    public String getLoginTime() {
         return loginTime;
     }
 
@@ -80,7 +80,7 @@ public class Employee {
         this.name = name;
     }
 
-    public void setLoginTime(LocalTime loginTime) {
+    public void setLoginTime(String loginTime) {
         this.loginTime = loginTime;
     }
 }

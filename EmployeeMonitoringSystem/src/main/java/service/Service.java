@@ -10,11 +10,13 @@ import repository.interfaces.IBossRepository;
 import repository.interfaces.ICompanyRepository;
 import repository.interfaces.IEmployeeRepository;
 import repository.interfaces.ITaskRepository;
+import utils.observer.Observable;
+import utils.observer.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Service implements IService {
+public class Service implements IService, Observable {
     private final ICompanyRepository companyRepository;
     private final IBossRepository bossRepository;
     private final IEmployeeRepository employeeRepository;
@@ -50,8 +52,10 @@ public class Service implements IService {
     }
 
     @Override
-    public void logout() {
-
+    public void logoutEmployee(Employee employee) {
+        employee.setLoginTime(null);
+        employeeRepository.update(employee.getId(), employee);
+        notifyObservers();
     }
 
     @Override
@@ -74,8 +78,10 @@ public class Service implements IService {
         List<Employee> employees = employeeRepository.findAllForBoss(boss);
         List<EmployeeDTO> employeeDTOs = new ArrayList<>();
         for(Employee employee : employees){
-            EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getUsername(), employee.getLoginTime().toString());
-            employeeDTOs.add(employeeDTO);
+            if(employee.getLoginTime() != null){
+                EmployeeDTO employeeDTO = new EmployeeDTO(employee.getId(), employee.getUsername(), employee.getLoginTime());
+                employeeDTOs.add(employeeDTO);
+            }
         }
 
         return employeeDTOs;
@@ -103,5 +109,37 @@ public class Service implements IService {
         task.setEmployee(employee);
 
         taskRepository.save(task);
+        notifyObservers();
+    }
+
+    @Override
+    public void presentAction(Integer hh, Integer mm, Employee employee) {
+        String loginTime = hh.toString() + ":" + mm.toString();
+        employee.setLoginTime(loginTime);
+        employeeRepository.update(employee.getId(), employee);
+        notifyObservers();
+    }
+
+    @Override
+    public void finishTask(Integer id) {
+        taskRepository.delete(id);
+        notifyObservers();
+    }
+
+    private List<Observer> observers = new ArrayList<>();
+
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    @Override
+    public void notifyObservers() {
+        observers.forEach(Observer::update);
     }
 }
