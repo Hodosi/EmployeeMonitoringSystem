@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SystemController">
    <children>
-      <AnchorPane fx:id="loginAnchorPane" layoutX="14.0" layoutY="14.0" prefHeight="575.0" prefWidth="775.0" visible="false">
+      <AnchorPane fx:id="loginAnchorPane" layoutX="14.0" layoutY="14.0" prefHeight="575.0" prefWidth="775.0">
          <children>
             <Label alignment="CENTER" layoutX="265.0" layoutY="242.0" prefHeight="26.0" prefWidth="98.0" text="Username:" />
             <TextField fx:id="usernameLoginTextField" layoutX="371.0" layoutY="243.0" />
@@ -56,7 +56,7 @@
             <TextField fx:id="taskNameTextFieldBoss" layoutX="14.0" layoutY="402.0" prefHeight="26.0" prefWidth="258.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="employeeAnchorPane" layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="775.0">
+      <AnchorPane fx:id="employeeAnchorPane" layoutX="14.0" layoutY="12.0" prefHeight="575.0" prefWidth="775.0" visible="false">
          <children>
             <TableView fx:id="tasksTableViewEmployee" prefHeight="575.0" prefWidth="474.0">
               <columns>

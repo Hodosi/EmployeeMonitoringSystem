@@ -1,10 +1,14 @@
 import controller.ServerController;
 import controller.SystemController;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -58,6 +62,21 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent e) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Server");
+                alert.setHeaderText("Exit");
+                alert.setContentText("Good bye!");
+                alert.showAndWait();
+
+                close();
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+
         initialize();
         IService service = initService();
 
@@ -76,7 +95,5 @@ public class Main extends Application {
         Scene scene = new Scene(pane, 600, 400);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        close();
     }
 }
